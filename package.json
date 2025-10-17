@@ -1,0 +1,13 @@
+{
+  "name": "profile-similarity-cli",
+  "version": "1.0.0",
+  "description": "CLI tool for profile recommendations using cosine similarity on CSV data",
+  "main": "index.js",
+  "repository": "https://github.com/allemandi/profile-similarity-cli.git",
+  "author": "allemandi <69766017+allemandi@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@allemandi/embed-utils": "^2.7.1",
+    "commander": "^14.0.1"
+  }
+}
