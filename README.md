@@ -1,8 +1,8 @@
-# Profile Similarity CLI
+# 📦 profile-similarity-cli
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A command-line interface (CLI) tool for finding similar profiles and potential mentors from a CSV dataset. This tool uses cosine similarity to compare profiles based on their skills and experience.
+Node.js CLI tool for finding similar profiles and potential mentors from a CSV dataset. This tool uses cosine similarity to compare profiles based on their skills and experience.
 
 ## 🚀 Features
 
@@ -62,10 +62,19 @@ node index.js mentors --query <your-profile.csv> --dataset <dataset.csv> [--top-
 node index.js mentors --query data/query-profile.csv --dataset data/dataset-profiles.csv --min-gap 1
 ```
 
-## Contributing
+## 🤝 Contributing
+If you have ideas, improvements, or new features:
 
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
+1. Fork the project
+2. Create your feature branch (git checkout -b feature/amazing-feature)
+3. Commit your changes (git commit -m 'Add some amazing feature')
+4. Push to the branch (git push origin feature/amazing-feature)
+5. Open a Pull Request
 
-## License
+## 💡 Acknowledgments
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project was developed with the help of AI tools for code suggestions, debugging, and optimizations.
+
+## 📄 License
+
+MIT
