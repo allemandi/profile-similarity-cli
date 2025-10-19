@@ -1,5 +1,5 @@
 const { findNearestNeighbors } = require('@allemandi/embed-utils');
-const { loadAndProcessProfiles } = require('../utils/common');
+const { loadAndProcessProfiles } = require('../utils/profiles');
 const { formatMentorsOutput } = require('../utils/format');
 
 const mentors = async (queryPath, datasetPath, topK = 5, minGap = 2) => {
