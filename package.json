@@ -5,17 +5,16 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "vitest run && bash tests/integration.sh"
+    "test": "node --test tests/index.test.js"
   },
   "repository": "https://github.com/allemandi/profile-similarity-cli.git",
   "author": "allemandi <69766017+allemandi@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
     "@allemandi/embed-utils": "^2.7.1",
-    "commander": "^14.0.3"
+    "commander": "^14.0.1"
   },
   "devDependencies": {
-    "eslint": "^8.23.1",
-    "vitest": "^4.1.3"
+    "eslint": "^8.23.1"
   }
 }
