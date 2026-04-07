@@ -11,7 +11,7 @@
   "author": "allemandi <69766017+allemandi@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
-    "@allemandi/embed-utils": "^2.7.1",
+    "@allemandi/embed-utils": "^2.7.7",
     "commander": "^13.1.0"
   },
   "devDependencies": {
