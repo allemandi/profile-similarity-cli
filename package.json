@@ -4,14 +4,15 @@
   "description": "CLI tool for profile recommendations using cosine similarity on CSV data",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node test.js"
   },
   "repository": "https://github.com/allemandi/profile-similarity-cli.git",
   "author": "allemandi <69766017+allemandi@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
     "@allemandi/embed-utils": "^2.7.1",
-    "commander": "^14.0.1"
+    "commander": "^13.1.0"
   },
   "devDependencies": {
     "eslint": "^8.23.1"
