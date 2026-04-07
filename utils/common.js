@@ -1,11 +1,38 @@
+const { findNearestNeighbors } = require('@allemandi/embed-utils');
 const { loadProfiles, toEmbedding } = require('./data');
-const { getUsedFields } = require('./sanitizer');
+
+/**
+ * Filters the fields of a query object to only include those that are also present in the data object and are finite numbers.
+ */
+const getUsedFields = (queryObj, dataObj) =>
+  Object.keys(queryObj).filter(f => {
+    if (f === 'name') return false;
+    if (dataObj[f] === undefined) return false;
+    const val = Number(queryObj[f]);
+    return Number.isFinite(val);
+  });
+
+/**
+ * Finds mentorship gaps between two sets of skills.
+ */
+const findMentorshipGaps = (yourSkills, theirSkills, skillNames, threshold = 2) => {
+  const gaps = [];
+  for (let i = 0; i < yourSkills.length; i++) {
+    const gap = theirSkills[i] - yourSkills[i];
+    if (gap >= threshold) {
+      gaps.push({
+        skill: skillNames[i],
+        yourLevel: yourSkills[i],
+        theirLevel: theirSkills[i],
+        gap,
+      });
+    }
+  }
+  return gaps;
+};
 
 /**
  * Loads and processes the profiles from the given paths.
- * @param {string} queryPath - The path to the query profile CSV.
- * @param {string} datasetPath - The path to the dataset CSV.
- * @returns {Promise<{queryProfile: Object, profiles: Array<Object>, fields: Array<string>, queryEmbedding: Array<number>, samples: Array<Object>}>} - A promise that resolves to the processed profiles.
  */
 const loadAndProcessProfiles = async (queryPath, datasetPath) => {
   const { queryProfile, profiles } = await loadProfiles(queryPath, datasetPath);
@@ -21,4 +48,9 @@ const loadAndProcessProfiles = async (queryPath, datasetPath) => {
   return { queryProfile, profiles, fields, queryEmbedding, samples };
 };
 
-module.exports = { loadAndProcessProfiles };
+module.exports = {
+  getUsedFields,
+  findMentorshipGaps,
+  findNearestNeighbors,
+  loadAndProcessProfiles,
+};
