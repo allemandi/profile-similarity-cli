@@ -1,3 +1,4 @@
+const { findNearestNeighbors } = require('@allemandi/embed-utils');
 const { loadProfiles, toEmbedding } = require('./data');
 
 /**
@@ -31,34 +32,6 @@ const findMentorshipGaps = (yourSkills, theirSkills, skillNames, threshold = 2) 
 };
 
 /**
- * Calculates the cosine similarity between two vectors.
- */
-const cosineSimilarity = (a, b) => {
-  let dotProduct = 0, mA = 0, mB = 0;
-  for (let i = 0; i < a.length; i++) {
-    dotProduct += a[i] * b[i];
-    mA += a[i] * a[i];
-    mB += b[i] * b[i];
-  }
-  return mA === 0 || mB === 0 ? 0 : dotProduct / (Math.sqrt(mA) * Math.sqrt(mB));
-};
-
-/**
- * Finds the nearest neighbors for a given query embedding.
- */
-const findNearestNeighbors = (queryEmbedding, samples, options = {}) => {
-  const { topK = 5 } = options;
-  const results = samples.map(sample => ({
-    ...sample,
-    similarityScore: cosineSimilarity(queryEmbedding, sample.embedding),
-  }));
-
-  return results
-    .sort((a, b) => b.similarityScore - a.similarityScore)
-    .slice(0, topK);
-};
-
-/**
  * Loads and processes the profiles from the given paths.
  */
 const loadAndProcessProfiles = async (queryPath, datasetPath) => {
@@ -78,7 +51,6 @@ const loadAndProcessProfiles = async (queryPath, datasetPath) => {
 module.exports = {
   getUsedFields,
   findMentorshipGaps,
-  cosineSimilarity,
   findNearestNeighbors,
   loadAndProcessProfiles,
 };

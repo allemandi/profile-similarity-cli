@@ -10,7 +10,9 @@
   "repository": "https://github.com/allemandi/profile-similarity-cli.git",
   "author": "allemandi <69766017+allemandi@users.noreply.github.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@allemandi/embed-utils": "^2.7.7"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.2.0",
