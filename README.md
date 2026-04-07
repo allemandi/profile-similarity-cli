@@ -70,12 +70,12 @@ To run the test suite, use the following command:
 yarn test
 ```
 
-This will run unit tests for the core logic and integration tests for the CLI commands using Node.js built-in test runner.
+This will run a set of unit and integration tests to ensure the tool's core logic and CLI commands are working correctly.
 
 ## ⚙️ CI Pipeline
 
 This project uses GitHub Actions for continuous integration. The pipeline automatically runs on every push and pull request to ensure that:
-- Dependencies are installed correctly (no additional testing dependencies required).
+- Dependencies are installed correctly (no additional testing dependencies required, compatible with Node.js 18+).
 - The code follows the style guidelines (linting).
 - All tests pass.
 
