@@ -1,22 +1,7 @@
-const { findMentorshipGaps } = require('./mentorship');
-
-/**
- * Pads a string with spaces to a certain length.
- * @param {string} s - The string to pad.
- * @param {number} l - The desired length.
- * @param {boolean} [right=false] - Whether to pad on the right.
- * @returns {string} - The padded string.
- */
-const pad = (s, l, right = false) =>
-  right
-    ? String(s) + ' '.repeat(l - String(s).length)
-    : ' '.repeat(l - String(s).length) + String(s);
+const { findMentorshipGaps } = require('./common');
 
 /**
  * Formats the output for the peers command.
- * @param {Array<Object>} results - The results from the nearest neighbor search.
- * @param {Object} queryProfile - The query profile.
- * @param {Array<string>} fields - The fields to include in the output.
  */
 const formatMatchOutput = (results, queryProfile, fields) => {
   console.log('Top Matches\n============\n');
@@ -32,10 +17,8 @@ const formatMatchOutput = (results, queryProfile, fields) => {
         tag = diff === 0 ? 'EXACT' : '';
       const sign = diff > 0 ? '+' : '';
       console.log(
-        `  ${pad(f, 20)}${pad(qv, 3)} -> ${pad(pv, 3)}   ${pad(
-          `(${sign}${diff})`,
-          6,
-          true
+        `  ${f.padStart(20)}${String(qv).padStart(3)} -> ${String(pv).padStart(3)}   ${`(${sign}${diff})`.padEnd(
+          6
         )}${tag ? `   ${tag}` : ''}`
       );
     }
@@ -45,10 +28,6 @@ const formatMatchOutput = (results, queryProfile, fields) => {
 
 /**
  * Formats the output for the mentors command.
- * @param {Array<Object>} results - The results from the nearest neighbor search.
- * @param {Array<number>} queryEmbedding - The query embedding.
- * @param {Array<string>} fields - The fields to include in the output.
- * @param {number} minGap - The minimum gap to be considered a mentorship opportunity.
  */
 const formatMentorsOutput = (results, queryEmbedding, fields, minGap) => {
   console.log('Top Mentors\n============\n');
@@ -70,10 +49,9 @@ const formatMentorsOutput = (results, queryEmbedding, fields, minGap) => {
       console.log('  Can mentor you in:');
       gaps.forEach(gap => {
         console.log(
-          `    ${pad(gap.skill, 20)}: ${pad(gap.yourLevel, 3)} -> ${pad(
-            gap.theirLevel,
-            3
-          )}   (gap: +${gap.gap})`
+          `    ${gap.skill.padStart(20)}: ${String(gap.yourLevel).padStart(3)} -> ${String(
+            gap.theirLevel
+          ).padStart(3)}   (gap: +${gap.gap})`
         );
       });
     } else {
@@ -83,4 +61,4 @@ const formatMentorsOutput = (results, queryEmbedding, fields, minGap) => {
   }
 };
 
-module.exports = { pad, formatMatchOutput, formatMentorsOutput };
+module.exports = { formatMatchOutput, formatMentorsOutput };

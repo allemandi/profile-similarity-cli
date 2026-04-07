@@ -1,5 +1,4 @@
-const { findNearestNeighbors } = require('@allemandi/embed-utils');
-const { loadAndProcessProfiles } = require('../utils/common');
+const { findNearestNeighbors, loadAndProcessProfiles } = require('../utils/common');
 const { formatMatchOutput } = require('../utils/format');
 
 const peers = async (queryPath, datasetPath, topK = 5) => {

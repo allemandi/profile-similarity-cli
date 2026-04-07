@@ -1,7 +1,6 @@
 const assert = require('node:assert');
 const { execSync } = require('node:child_process');
-const { getUsedFields } = require('./utils/sanitizer');
-const { findMentorshipGaps } = require('./utils/mentorship');
+const { getUsedFields, findMentorshipGaps } = require('./utils/common');
 
 console.log('Running Simplified Tests...');
 

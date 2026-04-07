@@ -1,22 +1,59 @@
-const { program } = require('commander');
+const { parseArgs } = require('node:util');
 const peers = require('./commands/peers');
 const mentors = require('./commands/mentors');
 
-program
-  .command('peers')
-  .description('Find similar profiles')
-  .requiredOption('-q, --query <path>', 'your profile CSV')
-  .requiredOption('-d, --dataset <path>', 'dataset CSV')
-  .option('-k, --top-k <number>', 'matches to return', '5')
-  .action(async o => peers(o.query, o.dataset, Number(o.topK) || 5));
+const { values, positionals } = parseArgs({
+  options: {
+    query: { type: 'string', short: 'q' },
+    dataset: { type: 'string', short: 'd' },
+    'top-k': { type: 'string', short: 'k' },
+    'min-gap': { type: 'string' },
+    help: { type: 'boolean', short: 'h' },
+  },
+  allowPositionals: true,
+  strict: false,
+});
 
-program
-  .command('mentors')
-  .description('Find potential mentors')
-  .requiredOption('-q, --query <path>', 'your profile CSV')
-  .requiredOption('-d, --dataset <path>', 'dataset CSV')
-  .option('-k, --top-k <number>', 'mentors to return', '5')
-  .option('--min-gap <number>', 'minimum skill gap', '2')
-  .action(async o => mentors(o.query, o.dataset, Number(o.topK) || 5, Number(o.minGap) || 2));
+const command = positionals[0];
 
-program.parse();
+if (values.help || !command) {
+  console.log(`
+Usage: node index.js <command> [options]
+
+Commands:
+  peers     Find similar profiles
+  mentors   Find potential mentors
+
+Options:
+  -q, --query <path>    Your profile CSV (required)
+  -d, --dataset <path>  Dataset CSV (required)
+  -k, --top-k <number>  Number of results to return (default: 5)
+  --min-gap <number>    Minimum skill gap for mentors (default: 2)
+  -h, --help            Show help
+  `);
+  process.exit(0);
+}
+
+if (!values.query || !values.dataset) {
+  console.error('Error: --query and --dataset are required');
+  process.exit(1);
+}
+
+const topK = Number(values['top-k']) || 5;
+
+(async () => {
+  try {
+    if (command === 'peers') {
+      await peers(values.query, values.dataset, topK);
+    } else if (command === 'mentors') {
+      const minGap = Number(values['min-gap']) || 2;
+      await mentors(values.query, values.dataset, topK, minGap);
+    } else {
+      console.error(`Unknown command: ${command}`);
+      process.exit(1);
+    }
+  } catch (err) {
+    console.error('An unexpected error occurred:', err);
+    process.exit(1);
+  }
+})();
