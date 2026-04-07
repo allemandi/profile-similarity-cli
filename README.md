@@ -70,7 +70,7 @@ To run the test suite, use the following command:
 yarn test
 ```
 
-This will run unit tests for the core logic and integration tests for the CLI commands.
+This will run unit tests for the core logic (using Vitest) and integration tests for the CLI commands.
 
 ## ⚙️ CI Pipeline
 
