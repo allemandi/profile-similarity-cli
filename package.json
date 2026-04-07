@@ -4,7 +4,8 @@
   "description": "CLI tool for profile recommendations using cosine similarity on CSV data",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node tests/test-sanitizer.js && node tests/test-mentorship.js && bash tests/integration.sh"
   },
   "repository": "https://github.com/allemandi/profile-similarity-cli.git",
   "author": "allemandi <69766017+allemandi@users.noreply.github.com>",

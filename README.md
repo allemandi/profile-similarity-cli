@@ -62,6 +62,25 @@ node index.js mentors --query <your-profile.csv> --dataset <dataset.csv> [--top-
 node index.js mentors --query data/query-profile.csv --dataset data/dataset-profiles.csv --min-gap 1
 ```
 
+## 🧪 Testing
+
+To run the test suite, use the following command:
+
+```bash
+yarn test
+```
+
+This will run unit tests for the core logic and integration tests for the CLI commands.
+
+## ⚙️ CI Pipeline
+
+This project uses GitHub Actions for continuous integration. The pipeline automatically runs on every push and pull request to ensure that:
+- Dependencies are installed correctly.
+- The code follows the style guidelines (linting).
+- All tests pass.
+
+This setup is designed to prevent breaking changes, especially when dependency updates are automated.
+
 ## 🤝 Contributing
 If you have ideas, improvements, or new features:
 
